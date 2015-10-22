@@ -26,13 +26,13 @@ def drawChannels(c, channels):
     # gap between canvas edge and y axis
     xgap = 30
     # gap between canvas edge and x axis
-    ygap = 20
+    ygap = 10
     # spacing between graphs
-    yspacing = 15
+    yspacing = 5
     ywidth = 25
     xlength = 300
     for i in range(6):
-        x0 = xgap 
+        x0 = xgap + xlength/2
         y0 = ygap + i*ywidth + i*yspacing
         y1 = ygap + (i+1)*ywidth + i*yspacing
         chlength = xgap + ((channels[i+1] - 1000)*xlength / 1024)
@@ -42,9 +42,9 @@ def drawChannelsOutline(c):
     # gap between canvas edge and y axis
     xgap = 30
     # gap between canvas edge and x axis
-    ygap = 20
+    ygap = 10
     # spacing between graphs
-    yspacing = 15
+    yspacing = 5
     ywidth = 25
     xlength = 300
     for i in range(6):
