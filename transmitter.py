@@ -5,28 +5,21 @@ import time
 
 def main():
     ser = openSerial()
-    getChannelPositions(ser)
-    print(ser.close())
+    c = 1
+    while c != 0:
+        channels = getChannelPositions(ser)
+        print(channels)
+    ser.close()
 
 def openSerial():
     ser = serial.Serial('/dev/ttyUSB0', 115200, timeout=0, xonxoff=True)
     return ser
 
 def getChannelPositions(ser):
-    print("Serial open:", ser.isOpen())
     send = bytearray.fromhex('55fd')
-    print(send)
     ser.write(send)
-    while ser.inWaiting() == 0:
-        time.sleep(.007)
-    bytesToRead = ser.inWaiting()
-    ser.read(bytesToRead)
-    while ser.inWaiting() == 0:
-        time.sleep(.007)
-    bytesToRead = ser.inWaiting()
-    ser.read(bytesToRead)
-    exit = 0
 
+    exit = 0
     # infinite loop
     while exit == 0:
         while ser.inWaiting() == 0:
@@ -47,7 +40,7 @@ def getChannelPositions(ser):
                 data = data >> 16
             channels.reverse()
 
-            print(channels)
+            return channels
 
 if __name__ == "__main__":
     main()
